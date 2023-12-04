@@ -1,0 +1,30 @@
+{
+  "users": [
+    {
+      "username": "test-name",
+      "password": "test-password",
+      "liked_events": [
+        {
+          "event_id": "",
+          "favorited_at": ""
+        }
+      ],
+      "id": 10
+    },
+    {
+      "username": "abc",
+      "password": "123",
+      "liked_events": [
+        {
+          "event_id": "",
+          "favorited_at": ""
+        },
+        {
+          "event_id": "vvG1bZ9IBsHS3a",
+          "favorited_at": "2023-12-04T05:32:46.752Z"
+        }
+      ],
+      "id": 12
+    }
+  ]
+}
