@@ -1,17 +1,80 @@
 import { ColorModeScript } from '@chakra-ui/react';
 import React, { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
+import { BrowserRouter, createBrowserRouter, RouterProvider } from "react-router-dom";
+import Create from './routes/Create';
+import Home from './routes/Home';
+import Root from './routes/Root';
+import Login from './routes/Login';
+import Profile from './routes/Profile';
+import Welcome from './routes/Welcome';
+import { fetchEvents, fetchUsers } from './api';
+import Admin from './routes/Admin';
+
+const baseURL = "http://localhost:5000";
+// const baseURL = process.env.REACT_APP_API_BASE_URL;
+// fix undefined
+
+
+const router = createBrowserRouter([
+  {
+    element: <Root />,
+    children: [
+      {
+        path: "/",
+        element: <Welcome />,
+      },
+          {
+            path: "/create",
+            element: <Create/>,
+            loader() {
+              return fetchUsers();
+            },
+          },
+          {
+            path: "/login",
+            element: <Login/>,
+            loader(){
+              return fetchUsers();
+            },
+          },
+    
+
+      {
+        path: "/home/:username",
+        element: <Home />,
+
+      },
+      {
+        path: "/profile/:username",
+        element: <Profile/>
+      },
+      {
+        path: "/admin", 
+        element: <Admin/>,
+        loader(){
+          return fetchUsers();
+        }
+      }
+    ],
+  },
+]);
+
 
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
 
+
+
 root.render(
   <StrictMode>
+   
+
     <ColorModeScript />
-    <App />
+    <RouterProvider router={router} />
+
   </StrictMode>
 );
 
